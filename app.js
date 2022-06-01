@@ -1,6 +1,7 @@
 // in milliseconds
 let sortingspeed = 250;
 let arraySet = false;
+let running = false;
 let container = document.getElementById("app");
 function updateSliderValue(value){
     let txt = document.getElementById("sliderValue");
@@ -13,7 +14,9 @@ function updateSortingSpeed(value){
 }
 
 function makeArray() {
+    
     if(!arraySet){
+        
         arraySet = true;
         let arrSize = document.getElementById("arrSlider").value;
         for(let i = 0; i<arrSize; i++){
@@ -36,6 +39,9 @@ function makeArray() {
 }
 
 async function bubbleSort(delay = 100) {
+    if(running) {return false;}
+
+    running = true;
     // get all blocks with the class arrayItem and store them in an array
     let arrItems = document.querySelectorAll(".arrayItem");
 
@@ -66,6 +72,7 @@ async function bubbleSort(delay = 100) {
         }
             arrItems[arrItems.length - i - 1].style.backgroundColor = "green";
     }
+    running=false;
 }
 
 function swapDivs(div1, div2) {
