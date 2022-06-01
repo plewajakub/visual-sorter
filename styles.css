@@ -49,3 +49,7 @@ background-color: lightblue;
 height: 50px;
 flex: 1;
 }
+.slideContainer {
+    display: flex;
+    gap: 1rem;
+}

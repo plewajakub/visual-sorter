@@ -1,9 +1,14 @@
 // in milliseconds
-const sortingSpeed = 50;
+let sortingspeed = 250;
 let arraySet = false;
 let container = document.getElementById("app");
 function updateSliderValue(value){
     let txt = document.getElementById("sliderValue");
+    txt.innerHTML = value;
+}
+function updateSortingSpeed(value){
+    let txt = document.getElementById("speedValue");
+    sortingspeed = value;
     txt.innerHTML = value;
 }
 
@@ -68,6 +73,6 @@ function swapDivs(div1, div2) {
         setTimeout(() => {
             container.insertBefore(div2,div1);
             resolve();
-        }, 250);
+        }, sortingspeed);
     });
 }
