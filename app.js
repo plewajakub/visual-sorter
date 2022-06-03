@@ -20,8 +20,8 @@ function makeArray() {
         arraySet = true;
         let arrSize = document.getElementById("arrSlider").value;
         for(let i = 0; i<arrSize; i++){
-            // generate random 1-100 value for a specified div
-            let value = Math.ceil(Math.random() * 100);
+            // generate random 10-100 value for a specified div
+            let value = Math.floor(Math.random() * 90)+10;
             // create a new div, our array element
             let arrayBlock = document.createElement("div");
             arrayBlock.classList.add("arrayItem");
@@ -46,13 +46,7 @@ async function bubbleSort(delay = 100) {
     let arrItems = document.querySelectorAll(".arrayItem");
 
     let length = arrItems.length;
-    for(let i=0; i<length; i++) {
-        for(let j=0; j<length-i-1; j++) {
-            // change color of blocks which are currently being compared to red
-            arrItems[j].style.backgroundColor = "red";
-            arrItems[j+1].style.backgroundColor = "red";
-            await new Promise((resolve) =>
-                setTimeout(() => {
+            setTimeout(() => {
                     resolve();
                 }, delay)
             );
@@ -67,8 +61,8 @@ async function bubbleSort(delay = 100) {
                 arrItems = document.querySelectorAll(".arrayItem");
             }
             // revert colors to default
-            arrItems[j].style.backgroundColor = "lightblue";
-            arrItems[j+1].style.backgroundColor = "lightblue";
+            arrItems[j].style.backgroundColor = "#4CE0D2";
+            arrItems[j+1].style.backgroundColor = "#4CE0D2";
         }
             arrItems[arrItems.length - i - 1].style.backgroundColor = "green";
     }
