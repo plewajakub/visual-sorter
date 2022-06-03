@@ -7,6 +7,26 @@
         color: #041B15;
 }
 
+@keyframes swapForward {
+    from {
+        transform: none;
+    }
+
+    to {
+        transform: translateX(var(--distance));
+    }
+}
+
+@keyframes swapBackward {
+    from {
+        transform: none;
+    }
+
+    to {
+        transform: translateX(calc(var(--distance) * -1));
+    }
+}
+
 body {
     max-width: 100vw;
     max-height: 100vh;

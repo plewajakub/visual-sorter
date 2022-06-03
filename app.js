@@ -24,6 +24,7 @@ function makeArray() {
             let value = Math.floor(Math.random() * 90)+10;
             // create a new div, our array element
             let arrayBlock = document.createElement("div");
+            let id = `ID${i}`;
             arrayBlock.classList.add("arrayItem");
             arrayBlock.style.height = `${value}%`;
             // creating a label element to display value inside of a block, later used for sorting
@@ -38,7 +39,7 @@ function makeArray() {
     }
 }
 
-async function bubbleSort(delay = 100) {
+async function bubbleSort(delay = sortingspeed) {
     if(running) {return false;}
 
     running = true;
@@ -51,11 +52,13 @@ async function bubbleSort(delay = 100) {
             // change color of blocks which are currently being compared to red
             arrItems[j].style.backgroundColor = "#E0115F";
             arrItems[j+1].style.backgroundColor = "#E0115F";
+
+            // 100ms delay to highlight blocks which are not being swapped
             await new Promise((resolve) =>
             setTimeout(() => {
                     resolve();
                 }, delay)
-            );
+            ); 
 
             // grab values of each compared blocks, store them in integers
             var value1 = Number(arrItems[j].childNodes[0].innerHTML);
@@ -77,9 +80,27 @@ async function bubbleSort(delay = 100) {
 
 function swapDivs(div1, div2) {
     return new Promise((resolve) => {
-        setTimeout(() => {
-            container.insertBefore(div2,div1);
-            resolve();
-        }, sortingspeed);
+            // get the size of flexbox gap and flex elements in pixels and assign them to a variable
+            let gapSize = Number(($("#app").css("gap").slice(0,-2)));
+            let blockWidth = div1.offsetWidth;
+            // calculate the distance which a block need to transform in order to complete the animation
+            let distance = gapSize + blockWidth;
+            // this just works and apparently it does an animation
+            document.body.style.setProperty('--distance', distance+"px");
+            $(div1).css({
+                animation: `${sortingspeed}ms swapForward forwards`
+            });
+
+            $(div2).css({
+                animation: `${sortingspeed}ms swapBackward forwards`
+            });
+            
+            setTimeout(() => {
+                container.insertBefore(div2,div1);
+                $(div1).css({animation: `none`});
+                $(div2).css({animation: `none`});
+                resolve();
+            }, sortingspeed); 
+            
     });
 }
