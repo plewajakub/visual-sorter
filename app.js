@@ -46,6 +46,12 @@ async function bubbleSort(delay = 100) {
     let arrItems = document.querySelectorAll(".arrayItem");
 
     let length = arrItems.length;
+    for(let i=0; i<length; i++) {
+        for(let j=0; j<length-i-1; j++) {
+            // change color of blocks which are currently being compared to red
+            arrItems[j].style.backgroundColor = "#E0115F";
+            arrItems[j+1].style.backgroundColor = "#E0115F";
+            await new Promise((resolve) =>
             setTimeout(() => {
                     resolve();
                 }, delay)
